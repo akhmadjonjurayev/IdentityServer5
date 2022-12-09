@@ -5,20 +5,40 @@ version: '3.4'
 services:
   identityserver5:
     image: identityserver5
+    container_name: dev-identityserver5
     build:
       context: .
       dockerfile: ./Dockerfile
     ports:
-      - 5001:5001
+      - 5000:5000
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     volumes:
       - ~/.vsdbg:/remote_debugger:rw
+    networks:
+      - kalinus-network
   
   postgresql:
     image: postgres
+    container_name: dev-postgre
     ports:
       - 5432:5432
     environment:
       - POSTGRES_PASSWORD=burgut
       - POSTGRES_USER=kalinus
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    env_file:
+      - .env
+    networks:
+      - kalinus-network
+    volumes:
+      - db_data:/var/lib/postgresql/data/pgdata
+
+networks:
+  kalinus-network:
+    name: kalinus-network
+    driver: bridge
+  
+volumes:
+  db_data:
+    driver: local

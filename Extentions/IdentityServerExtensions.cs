@@ -1,4 +1,5 @@
 using IdentityServer5.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace IdentityServer5.Extentions
 {
@@ -6,7 +7,8 @@ namespace IdentityServer5.Extentions
     {
         public static WebApplicationBuilder ConfigureIdentityServer(this WebApplicationBuilder app, IConfiguration Configuration)
         {
-            app.Services.AddIdentityServer(options => {
+            app.Services.AddIdentityServer(options =>
+            {
                 options.Events.RaiseErrorEvents = true;
                 options.Events.RaiseFailureEvents = true;
                 options.Events.RaiseInformationEvents = true;
@@ -15,7 +17,13 @@ namespace IdentityServer5.Extentions
                 options.EmitStaticAudienceClaim = true;
 
                 options.IssuerUri = Configuration["IdentityUrl"];
-            }).AddClientStore<ClientStore>();
+            })
+             .AddConfigurationStore(opt =>
+            {
+            opt.ConfigureDbContext = c => c.UseNpgsql(Configuration.GetConnectionString("MyConnection"),
+                sql => sql.MigrationsAssembly("__EFMigrationsHistory"));
+            })
+            .AddClientStore<ClientStore>();
 
             return app;
         }

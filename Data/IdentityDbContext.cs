@@ -11,6 +11,4 @@ public class IdentityDb : IdentityDbContext<User, IdentityRole<Guid>, Guid>
     }
 
     public override DbSet<User> Users {get;set;}
-
-    public DbSet<Client> Clients {get;set;}
 }

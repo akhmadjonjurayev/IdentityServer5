@@ -23,7 +23,8 @@ namespace IdentityServer5.Extentions
             opt.ConfigureDbContext = c => c.UseNpgsql(Configuration.GetConnectionString("MyConnection"),
                 sql => sql.MigrationsAssembly("__EFMigrationsHistory"));
             })
-            .AddClientStore<ClientStore>();
+            .AddClientStore<ClientStore>()
+            .AddResourceStore<ResourceStore>();
 
             return app;
         }

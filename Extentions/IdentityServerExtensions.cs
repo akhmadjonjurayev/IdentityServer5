@@ -7,6 +7,11 @@ namespace IdentityServer5.Extentions
     {
         public static WebApplicationBuilder ConfigureIdentityServer(this WebApplicationBuilder app, IConfiguration Configuration)
         {
+            app.Services.AddIdentity<User, UserRole>(option =>
+            {
+                option.Password.RequireLowercase = false;
+            }).AddEntityFrameworkStores<IdentityDb>();
+
             app.Services.AddIdentityServer(options =>
             {
                 options.Events.RaiseErrorEvents = true;

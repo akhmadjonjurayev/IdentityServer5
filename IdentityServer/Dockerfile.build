@@ -1,0 +1,13 @@
+#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
+# Docker file to create image from already built and published .NET Core app
+# Build and publish happens in Azure Pipeline
+
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+WORKDIR /app
+ENV ASPNETCORE_ENVIRONMENT=Production
+ENV ASPNETCORE_URLS=http://+:5001
+EXPOSE 5001
+
+COPY publish .
+ENTRYPOINT ["dotnet", "IdentityServer.dll"]

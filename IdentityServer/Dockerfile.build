@@ -10,4 +10,4 @@ ENV ASPNETCORE_URLS=http://+:5001
 EXPOSE 5001
 
 COPY publish .
-ENTRYPOINT ["dotnet", "IdentityServer.dll"]
+ENTRYPOINT ["dotnet", "IdentityServer5.dll"]

@@ -6,14 +6,30 @@
 trigger:
 - master
 
-pool:
-  vmImage: ubuntu-latest
+stages:
+  - stage: Build
+    displayName: Build CI
+    pool: ubuntu-latest
+    jobs: 
+     - job: Build
+       displayName: Build CI
+       steps:
+         - task: NuGetCommand@2
+           inputs:
+             command: 'restore'
+             restoreSolution: '**/*.sln'
+             feedsToUse: 'select'
+         - task: DotNetCoreCLI@2
+           condition: succeeded()
+           inputs:
+             command: 'build'
+             projects: '**/*.csproj'
+         - task: GitTag@7
+           condition: succeeded()
+           inputs:
+             workingdir: '$(SYSTEM.DEFAULTWORKINGDIRECTORY)'
+             tagEmail: 'a.jorayev@baik.uz'
+             tag: '$(build.buildNumber)'
+        
+          
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'

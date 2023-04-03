@@ -30,7 +30,7 @@ stages:
            inputs:
              workingdir: '$(SYSTEM.DEFAULTWORKINGDIRECTORY)'
              tagEmail: 'a.jorayev@baik.uz'
-             tag: '$(build.buildNumber)'
+             tag: 'v1.0.$(build.buildNumber)'
         
           
 

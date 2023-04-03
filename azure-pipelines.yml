@@ -10,7 +10,7 @@ stages:
   - stage: Build
     displayName: Build CI
     pool:
-      vmImage: ubuntu-latest
+      vmImage: windows-latest
     jobs: 
      - job: Build
        displayName: Build CI

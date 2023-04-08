@@ -25,13 +25,15 @@ stages:
            inputs:
              command: 'build'
              projects: '**/*.csproj'
-             
-         - task: GitTag@7
-           condition: succeeded()
+         - task: Bash@3
            inputs:
-             workingdir: '$(SYSTEM.DEFAULTWORKINGDIRECTORY)'
-             tagEmail: 'a.jorayev@baik.uz'
-             tag: 'v1.0.$(build.buildNumber)'
+             targetType: 'inline'
+             script: |
+               # Write your commands here
+               git config --global user.email "a.jorayev@baik.uz"
+               git config --global user.name "Akhmadjon Jurayev"
+               git tag $(build.buildNumber)
+               echo 'Hello world' $(build.buildNumber)
         
           
 

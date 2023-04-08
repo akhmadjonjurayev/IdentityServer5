@@ -25,6 +25,15 @@ stages:
            inputs:
              command: 'build'
              projects: '**/*.csproj'
+
+         - task: gitversion/setup@0.9.15
+           displayName: "Setup GitVersion"
+           inputs:
+             versionSpec: "5.x"
+
+         - task: gitversion/execute@0.9.15
+           displayName: "GitVersion execute"
+
          - task: Bash@3
            inputs:
              targetType: 'inline'

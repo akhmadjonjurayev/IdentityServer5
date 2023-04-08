@@ -10,7 +10,7 @@ stages:
   - stage: Build
     displayName: Build CI
     pool:
-      vmImage: windows-latest
+      vmImage: ubuntu-latest
     jobs: 
      - job: Build
        displayName: Build CI
@@ -25,6 +25,7 @@ stages:
            inputs:
              command: 'build'
              projects: '**/*.csproj'
+             
          - task: GitTag@7
            condition: succeeded()
            inputs:

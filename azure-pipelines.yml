@@ -29,11 +29,11 @@ stages:
            inputs:
              targetType: 'inline'
              script: |
-               # Write your commands here
                git config --global user.email "a.jorayev@baik.uz"
                git config --global user.name "Akhmadjon Jurayev"
-               git tag $(build.buildNumber)
-               echo 'Hello world' $(build.buildNumber)
+               git tag -a $(GitVersion.SemVer) -m "Tagged version $(GitVersion.SemVer)"
+               git push origin $(GitVersion.SemVer)
+               echo $(GitVersion.SemVer)
         
           
 

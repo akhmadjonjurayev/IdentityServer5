@@ -25,6 +25,10 @@ stages:
            inputs:
              command: 'build'
              projects: '**/*.csproj'
+         - task: Bash@3
+           inputs:
+             targetType: 'inline'
+             script: 'git fetch --unshallow'
 
          - task: GitVersion@5
            displayName: "Setup GitVersion"

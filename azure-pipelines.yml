@@ -28,7 +28,7 @@ stages:
 
          - task: GitVersion@5
            inputs:
-             versionSpec: 'v5.1.2'
+             versionSpec: 'v5.12.0'
            displayName: "Setup GitVersion"
 
          - task: GitVersion@5

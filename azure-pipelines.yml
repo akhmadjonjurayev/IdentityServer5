@@ -27,6 +27,8 @@ stages:
              projects: '**/*.csproj'
 
          - task: GitVersion@5
+           inputs:
+             versionSpec: 'v5.1.2'
            displayName: "Setup GitVersion"
 
          - task: GitVersion@5

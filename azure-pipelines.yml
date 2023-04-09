@@ -28,6 +28,8 @@ stages:
 
          - task: GitVersion@5
            displayName: "Setup GitVersion"
+           inputs:
+             versionSpec: "5.x"
 
          - task: GitVersion@5
            displayName: "GitVersion execute"

@@ -29,7 +29,8 @@ stages:
          - task: GitVersion@5
            displayName: "Setup GitVersion"
            inputs:
-             versionSpec: "5.x"
+             versionSpec: '1.x.x'
+             includePrerelease: true
 
          - task: GitVersion@5
            displayName: "GitVersion execute"

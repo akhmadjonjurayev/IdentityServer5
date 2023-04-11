@@ -55,7 +55,7 @@ stages:
 
          - task: Docker@2
            inputs:
-             containerRegistry: 'IdentityServer5'
+             containerRegistry: 'publish docker hub'
              repository: 'IdentityServer'
              command: 'buildAndPush'
              Dockerfile: '**/Dockerfile'

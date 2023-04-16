@@ -52,16 +52,6 @@ stages:
                git tag -a $(GitVersion.SemVer) -m "Tagged version $(GitVersion.SemVer)"
                git push origin $(GitVersion.SemVer)
                echo $(GitVersion.SemVer)
-
-         - task: Docker@2
-           inputs:
-              containerRegistry: 'publish docker hub'
-              command: 'login'
-         - task: Docker@2
-           inputs:
-             containerRegistry: 'publish docker hub'
-             command: 'build'
-             Dockerfile: '**/Dockerfile'
                
          - task: Docker@2
            inputs:

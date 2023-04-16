@@ -66,13 +66,13 @@ stages:
            inputs:
              targetType: 'inline'
              script: |
-               git push akhmadjonjurayev/identityserver:$(GitVersion.SemVer)
+               docker push akhmadjonjurayev/identityserver:$(GitVersion.SemVer)
         
          - task: Docker@2
            displayName: Push docker hub
            inputs:
              containerRegistry: 'publish docker hub'
-             repository: 'akhmadjonjurayev\identityServer'
+             repository: 'akhmadjonjurayev'
              command: 'push'
              tags: '$(GitVersion.SemVer)'
         

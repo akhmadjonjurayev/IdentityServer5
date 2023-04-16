@@ -66,6 +66,7 @@ stages:
            inputs:
              targetType: 'inline'
              script: |
+               echo docker push akhmadjonjurayev/identityserver:$(GitVersion.SemVer)
                docker push akhmadjonjurayev/identityserver:$(GitVersion.SemVer)
         
          - task: Docker@2

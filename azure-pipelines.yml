@@ -57,12 +57,16 @@ stages:
            inputs:
               containerRegistry: 'publish docker hub'
               command: 'login'
-
          - task: Docker@2
-           displayName: Publish To Dcoker Hub
            inputs:
              containerRegistry: 'publish docker hub'
-             repository: 'identityServer'
+             command: 'build'
+             Dockerfile: '**/Dockerfile'
+               
+         - task: Docker@2
+           inputs:
+             containerRegistry: 'publish docker hub'
+             repository: 'akhmadjonjurayev\identityServer'
              command: 'buildAndPush'
              Dockerfile: '**/Dockerfile'
              tags: '$(GitVersion.SemVer)'

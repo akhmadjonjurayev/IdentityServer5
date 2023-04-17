@@ -53,11 +53,11 @@ stages:
                git push origin $(GitVersion.SemVer)
                echo $(GitVersion.SemVer)
 
-         - task: Bash@3
-           displayName: Login to Docker Hub
-           inputs:
-             targetType: 'inline'
-             script: 'docker login -u akhmadjonjurayev -p dckr_pat_yBreYvmQFUwAYdv02ZuV_v07Y9w'
+        #  - task: Bash@3
+        #    displayName: Login to Docker Hub
+        #    inputs:
+        #      targetType: 'inline'
+        #      script: 'docker login -u akhmadjonjurayev -p dckr_pat_yBreYvmQFUwAYdv02ZuV_v07Y9w'
          - task: Docker@2
            inputs:
              containerRegistry: 'publish docker hub'
@@ -66,21 +66,21 @@ stages:
              Dockerfile: '**/Dockerfile'
              tags: '$(GitVersion.SemVer)'
 
-         - task: Docker@2
-           inputs:
-             containerRegistry: 'publish docker hub'
-             command: 'build'
-             repository: identityserver
-             Dockerfile: '**/Dockerfile'
-             tags: $(GitVersion.SemVer)
+        #  - task: Docker@2
+        #    inputs:
+        #      containerRegistry: 'publish docker hub'
+        #      command: 'build'
+        #      repository: identityserver
+        #      Dockerfile: '**/Dockerfile'
+        #      tags: $(GitVersion.SemVer)
                
-         - task: Bash@3
-           displayName: Docker build and push
-           inputs:
-             targetType: 'inline'
-             script: |
-               docker tag identityserver:$(GitVersion.SemVer) akhmadjonjurayev/identityserver:$(GitVersion.SemVer)
-               docker image push akhmadjonjurayev/identityserver:$(GitVersion.SemVer)
+        #  - task: Bash@3
+        #    displayName: Docker build and push
+        #    inputs:
+        #      targetType: 'inline'
+        #      script: |
+        #        docker tag identityserver:$(GitVersion.SemVer) akhmadjonjurayev/identityserver:$(GitVersion.SemVer)
+        #        docker image push akhmadjonjurayev/identityserver:$(GitVersion.SemVer)
         
           
 

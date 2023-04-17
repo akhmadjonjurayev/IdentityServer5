@@ -58,7 +58,7 @@ stages:
            inputs:
              targetType: 'inline'
              script: |
-               docker build -f $(Build.SourcesDirectory)/Dockerfile -t identityserver:$(GitVersion.SemVer) .
+               docker build -f **/Dockerfile -t identityserver:$(GitVersion.SemVer) .
                docker tag identityserver:$(GitVersion.SemVer) akhmadjonjurayev/identityserver:$(GitVersion.SemVer)
                docker image push akhmadjonjurayev/identityserver:$(GitVersion.SemVer)
         

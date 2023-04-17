@@ -56,6 +56,14 @@ stages:
          - task: Docker@2
            inputs:
              containerRegistry: 'publish docker hub'
+             repository: 'identityserver'
+             command: 'buildAndPush'
+             Dockerfile: '**/Dockerfile'
+             tags: '$(GitVersion.SemVer)'
+
+         - task: Docker@2
+           inputs:
+             containerRegistry: 'publish docker hub'
              command: 'build'
              repository: identityserver
              Dockerfile: '**/Dockerfile'

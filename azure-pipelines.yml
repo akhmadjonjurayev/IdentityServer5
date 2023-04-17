@@ -56,6 +56,10 @@ stages:
          - task: Docker@2
            inputs:
              containerRegistry: 'publish docker hub'
+             command: 'login'
+         - task: Docker@2
+           inputs:
+             containerRegistry: 'publish docker hub'
              repository: 'identityserver'
              command: 'buildAndPush'
              Dockerfile: '**/Dockerfile'

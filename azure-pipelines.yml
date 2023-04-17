@@ -53,13 +53,14 @@ stages:
                git push origin $(GitVersion.SemVer)
                echo $(GitVersion.SemVer)
                
-         - task: Docker@2
+         - task: Bash@3
+           displayName: Docker build and push
            inputs:
-             containerRegistry: 'publish docker hub'
-             repository: 'identityserver'
-             command: 'buildAndPush'
-             Dockerfile: '**/Dockerfile'
-             tags: '$(GitVersion.SemVer)'
+             targetType: 'inline'
+             script: |
+               docker build -f $(Build.SourcesDirectory)/Dockerfile -t identityserver:$(GitVersion.SemVer) .
+               docker tag identityserver:$(GitVersion.SemVer) akhmadjonjurayev/identityserver:$(GitVersion.SemVer)
+               docker image push akhmadjonjurayev/identityserver:$(GitVersion.SemVer)
         
           
 

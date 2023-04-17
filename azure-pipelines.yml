@@ -59,6 +59,7 @@ stages:
              command: 'build'
              repository: identityserver
              Dockerfile: '**/Dockerfile'
+             tags: $(GitVersion.SemVer)
                
          - task: Bash@3
            displayName: Docker build and push

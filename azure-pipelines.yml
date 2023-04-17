@@ -53,10 +53,11 @@ stages:
                git push origin $(GitVersion.SemVer)
                echo $(GitVersion.SemVer)
 
-         - task: Docker@2
+         - task: Bash@3
+           displayName: Login to Docker Hub
            inputs:
-             containerRegistry: 'publish docker hub'
-             command: 'login'
+             targetType: 'inline'
+             script: 'docker login -u akhmadjonjurayev -p dckr_pat_yBreYvmQFUwAYdv02ZuV_v07Y9w'
          - task: Docker@2
            inputs:
              containerRegistry: 'publish docker hub'

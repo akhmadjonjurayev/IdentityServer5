@@ -58,6 +58,7 @@ stages:
              containerRegistry: 'publish docker hub'
              command: 'build'
              Dockerfile: '**/Dockerfile'
+             tags: identityserver
                
          - task: Bash@3
            displayName: Docker build and push

@@ -54,27 +54,11 @@ stages:
                echo $(GitVersion.SemVer)
                
          - task: Docker@2
-           displayName: Build docker image
            inputs:
              containerRegistry: 'publish docker hub'
-             repository: 'identityServer'
-             command: 'build'
+             repository: 'identityserver'
+             command: 'buildAndPush'
              Dockerfile: '**/Dockerfile'
-             tags: '$(GitVersion.SemVer)'
-          
-         - task: Bash@3
-           inputs:
-             targetType: 'inline'
-             script: |
-               echo docker push akhmadjonjurayev/identityserver:$(GitVersion.SemVer)
-               docker push akhmadjonjurayev/identityserver:$(GitVersion.SemVer)
-        
-         - task: Docker@2
-           displayName: Push docker hub
-           inputs:
-             containerRegistry: 'publish docker hub'
-             repository: 'akhmadjonjurayev'
-             command: 'push'
              tags: '$(GitVersion.SemVer)'
         
           

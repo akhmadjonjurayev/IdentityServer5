@@ -18,11 +18,11 @@ stages:
          - checkout: self
            persistCredentials: true
            
-         - task: UseDotNet@2
-           displayName: Install dotnet 6
-           inputs:
-             version: '6.0.x'
-             includePreviewVersions: true
+        #  - task: UseDotNet@2
+        #    displayName: Install dotnet 6
+        #    inputs:
+        #      version: '6.0.x'
+        #      includePreviewVersions: true
          - task: NuGetCommand@2
            displayName: Nuget restore
            inputs:

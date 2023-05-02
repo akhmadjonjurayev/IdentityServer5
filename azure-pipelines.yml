@@ -18,6 +18,10 @@ stages:
          - checkout: self
            persistCredentials: true
            
+         - task: UseDotNet@2
+           inputs:
+             version: '6.x'
+             includePreviewVersions: true
          - task: NuGetCommand@2
            inputs:
              command: 'restore'

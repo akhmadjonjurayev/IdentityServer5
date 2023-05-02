@@ -56,6 +56,7 @@ stages:
            displayName: create nuget package
            inputs:
              command: 'restore'
+             projects: '**/*.csproj'
              feedsToUse: 'select'
              vstsFeed: '16ce4973-69f3-4ab5-af72-520f7669913e/1d95a881-d905-4587-ac44-350ab95688ae'
              noCache: true

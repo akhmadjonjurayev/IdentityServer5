@@ -19,21 +19,25 @@ stages:
            persistCredentials: true
            
          - task: UseDotNet@2
+           displayName: Install dotnet 6
            inputs:
              version: '6.x'
              includePreviewVersions: true
          - task: NuGetCommand@2
+           displayName: Nuget restore
            inputs:
              command: 'restore'
              restoreSolution: '**/*.sln'
              feedsToUse: 'select'
           
          - task: DotNetCoreCLI@2
+           displayName: build project
            condition: succeeded()
            inputs:
              command: 'build'
              projects: '**/*.csproj'
          - task: Bash@3
+           displayName: detect git origin
            inputs:
              targetType: 'inline'
              script: 'git fetch --unshallow'
@@ -49,21 +53,23 @@ stages:
            displayName: "GitVersion execute"
            
          - task: DotNetCoreCLI@2
+           displayName: create nuget package
            inputs:
-             command: 'pack'
-             packagesToPack: '**/*.csproj'
-             includesource: true
-             versioningScheme: 'off'
+             command: 'restore'
+             feedsToUse: 'select'
+             vstsFeed: '16ce4973-69f3-4ab5-af72-520f7669913e/1d95a881-d905-4587-ac44-350ab95688ae'
+             noCache: true
             
          - task: DotNetCoreCLI@2
+           displayName: publish to artifacts
            inputs:
              command: 'push'
              packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
              nuGetFeedType: 'internal'
              publishVstsFeed: '16ce4973-69f3-4ab5-af72-520f7669913e/1d95a881-d905-4587-ac44-350ab95688ae'
           
-
          - task: Bash@3
+           displayName: Tag to project
            inputs:
              targetType: 'inline'
              script: |
@@ -87,6 +93,7 @@ stages:
         #      tags: '$(GitVersion.SemVer)'
 
          - task: Docker@2
+           displayName: Create docker image
            inputs:
              containerRegistry: 'publish docker hub'
              command: 'build'

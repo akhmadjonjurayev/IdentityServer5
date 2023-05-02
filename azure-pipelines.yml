@@ -23,6 +23,7 @@ stages:
              command: 'restore'
              restoreSolution: '**/*.sln'
              feedsToUse: 'select'
+          
          - task: DotNetCoreCLI@2
            condition: succeeded()
            inputs:
@@ -42,6 +43,21 @@ stages:
            inputs:
              versionSpec: '5.x'
            displayName: "GitVersion execute"
+           
+         - task: DotNetCoreCLI@2
+           inputs:
+             command: 'pack'
+             packagesToPack: '**/*.csproj'
+             includesource: true
+             versioningScheme: 'off'
+            
+         - task: DotNetCoreCLI@2
+           inputs:
+             command: 'push'
+             packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+             nuGetFeedType: 'internal'
+             publishVstsFeed: '16ce4973-69f3-4ab5-af72-520f7669913e/1d95a881-d905-4587-ac44-350ab95688ae'
+          
 
          - task: Bash@3
            inputs:
@@ -81,11 +97,4 @@ stages:
              script: |
                docker tag identityserver:$(GitVersion.SemVer) akhmadjonjurayev/identityserver:$(GitVersion.SemVer)
                docker image push akhmadjonjurayev/identityserver:$(GitVersion.SemVer)
-         - task: DotNetCoreCLI@2
-           inputs:
-             command: 'push'
-             packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
-             nuGetFeedType: 'internal'
-             publishVstsFeed: '16ce4973-69f3-4ab5-af72-520f7669913e/1d95a881-d905-4587-ac44-350ab95688ae'
-          
 

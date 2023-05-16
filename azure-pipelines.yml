@@ -52,14 +52,14 @@ stages:
            inputs:
              command: 'pack'
              packagesToPack: '**/*.csproj'
-             packDirectory: '$(Build.ArtifactStagingDirectory)/identityserver'
+             packDirectory: '$(Build.ArtifactStagingDirectory)'
              versioningScheme: 'off'
 
          - task: DotNetCoreCLI@2
            displayName: publish to artifacts
            inputs:
              command: 'push'
-             packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg'
+             packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
              nuGetFeedType: 'internal'
              publishVstsFeed: '16ce4973-69f3-4ab5-af72-520f7669913e/1d95a881-d905-4587-ac44-350ab95688ae'
           

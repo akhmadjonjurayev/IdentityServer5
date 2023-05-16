@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Identity;
 
-public class User : IdentityUser<Guid>
+namespace IdentityServer5.Models
 {
+    public class User : IdentityUser<Guid>
+    {
 
+    }
 }

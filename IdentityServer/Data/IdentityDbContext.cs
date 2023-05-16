@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Duende.IdentityServer.Models;
+using IdentityServer5.Models;
 
 public class IdentityDb : IdentityDbContext<User, IdentityRole<Guid>, Guid>
 {

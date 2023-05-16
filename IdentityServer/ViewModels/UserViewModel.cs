@@ -8,6 +8,8 @@
 
         public string Password { get; set; }
 
+        public string Email { get; set; }
+
         public bool Enabled { get; set; }
 
         public string RoleName { get; set; }

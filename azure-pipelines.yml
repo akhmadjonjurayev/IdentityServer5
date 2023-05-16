@@ -18,11 +18,6 @@ stages:
          - checkout: self
            persistCredentials: true
            
-        #  - task: UseDotNet@2
-        #    displayName: Install dotnet 6
-        #    inputs:
-        #      version: '6.0.x'
-        #      includePreviewVersions: true
          - task: NuGetCommand@2
            displayName: Nuget restore
            inputs:
@@ -57,9 +52,9 @@ stages:
            inputs:
              command: 'pack'
              packagesToPack: '**/*.csproj'
+             packDirectory: '$(Build.ArtifactStagingDirectory)/identityserver'
              versioningScheme: 'off'
-             versionEnvVar: GitVersion.NuGetVersion
-            
+
          - task: DotNetCoreCLI@2
            displayName: publish to artifacts
            inputs:

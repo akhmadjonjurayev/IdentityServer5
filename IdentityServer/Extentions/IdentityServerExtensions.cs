@@ -1,4 +1,5 @@
 using IdentityServer5.Data;
+using IdentityServer5.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace IdentityServer5.Extentions

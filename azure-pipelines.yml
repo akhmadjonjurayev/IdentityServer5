@@ -1,0 +1,81 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+stages:
+  - stage: Build
+    displayName: Build CI
+    pool:
+      vmImage: ubuntu-latest
+    jobs: 
+     - job: Build
+       displayName: Build CI
+       steps:
+         - checkout: self
+           persistCredentials: true
+           
+         - task: NuGetCommand@2
+           inputs:
+             command: 'restore'
+             restoreSolution: '**/*.sln'
+             feedsToUse: 'select'
+         - task: DotNetCoreCLI@2
+           condition: succeeded()
+           inputs:
+             command: 'build'
+             projects: '**/*.csproj'
+         - task: Bash@3
+           inputs:
+             targetType: 'inline'
+             script: 'git fetch --unshallow'
+
+         - task: GitVersion@5
+           displayName: "Setup GitVersion"
+           inputs:
+             versionSpec: "5.x"
+
+         - task: GitVersion@5
+           inputs:
+             versionSpec: '5.x'
+           displayName: "GitVersion execute"
+
+         - task: Bash@3
+           inputs:
+             targetType: 'inline'
+             script: |
+               git config --global user.email "a.jorayev@baik.uz"
+               git config --global user.name "Akhmadjon Jurayev"
+               git tag -a $(GitVersion.SemVer) -m "Tagged version $(GitVersion.SemVer)"
+               git push origin $(GitVersion.SemVer)
+               echo $(GitVersion.SemVer)
+               
+         - task: Docker@2
+           displayName: Build docker image
+           inputs:
+             containerRegistry: 'publish docker hub'
+             repository: 'identityServer'
+             command: 'build'
+             Dockerfile: '**/Dockerfile'
+             tags: '$(GitVersion.SemVer)'
+          
+         - task: Bash@3
+           inputs:
+             targetType: 'inline'
+             script: |
+               echo docker push akhmadjonjurayev/identityserver:$(GitVersion.SemVer)
+               docker push akhmadjonjurayev/identityserver:$(GitVersion.SemVer)
+        
+         - task: Docker@2
+           displayName: Push docker hub
+           inputs:
+             containerRegistry: 'publish docker hub'
+             repository: 'akhmadjonjurayev'
+             command: 'push'
+             tags: '$(GitVersion.SemVer)'
+        
+          
+

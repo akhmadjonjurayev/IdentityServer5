@@ -9,5 +9,7 @@ ENV ASPNETCORE_ENVIRONMENT=Production
 ENV ASPNETCORE_URLS=http://+:5001
 EXPOSE 5001
 
+RUN dotnet publish -o /app/publish
+
 COPY publish .
 ENTRYPOINT ["dotnet", "IdentityServer5.dll"]

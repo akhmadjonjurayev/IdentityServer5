@@ -21,5 +21,17 @@ namespace IdentityServer5.Controllers
         {
             return await _userService.CreateUserAsync(viewModel);
         }
+
+        [HttpPut]
+        public async Task<JsonResponse> UpdateUser([FromBody] UserViewModel viewModel)
+        {
+            return await _userService.UpdateUserAsync(viewModel);
+        }
+
+        [HttpDelete]
+        public async Task<JsonResponse> DeleteUser([FromQuery] Guid userId)
+        {
+            return await _userService.DeleteUser(userId);
+        }
     }
 }

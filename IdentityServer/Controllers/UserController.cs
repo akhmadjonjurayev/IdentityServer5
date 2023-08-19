@@ -33,5 +33,11 @@ namespace IdentityServer5.Controllers
         {
             return await _userService.DeleteUser(userId);
         }
+
+        [HttpPost]
+        public async Task<JsonResponse> ChangeUserPassword([FromBody] ChangeUserPassword viewModel)
+        {
+            return await (_userService.ChangeUserPassword(viewModel));
+        }
     }
 }

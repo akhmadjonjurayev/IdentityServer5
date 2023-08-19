@@ -73,5 +73,18 @@ namespace IdentityServer5.Service
                 return JsonResponse.SuccessResponce("success-delete-data");
             return JsonResponse.ErrorResponse("error-delete-data");
         }
+
+        public async Task<JsonResponse> ChangeUserPassword(ChangeUserPassword viewModel)
+        {
+            if (string.IsNullOrEmpty(viewModel.NewPassword) || string.IsNullOrEmpty(viewModel.OldPassword) || viewModel.NewPassword.Equals(viewModel.OldPassword, StringComparison.OrdinalIgnoreCase))
+                return JsonResponse.ErrorResponse("error-invalid-data");
+            var user = await _identityDbContext.Users.FirstOrDefaultAsync(us => us.Id == viewModel.UserId);
+            if (user == null)
+                return JsonResponse.ErrorResponse("error-not-found-data");
+            var result = await _userManager.ChangePasswordAsync(user, viewModel.OldPassword, viewModel.NewPassword);
+            if (result.Succeeded)
+                return JsonResponse.SuccessResponce("success-update-data");
+            return JsonResponse.ErrorResponse("error-update-data");
+        }
     }
 }

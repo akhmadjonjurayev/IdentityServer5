@@ -37,3 +37,5 @@
 /IdentityServer/bin
 /IdentityServer/obj
 /IdentityServer/.vs
+/docker-compose/bin
+/docker-compose/obj

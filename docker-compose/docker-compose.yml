@@ -1,0 +1,7 @@
+version: '3.4'
+
+services:
+  identityserver5:
+    image: identityserver5
+    build:
+      context: ..

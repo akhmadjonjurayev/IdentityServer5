@@ -1,6 +1,7 @@
 using IdentityServer5.Data;
 using IdentityServer5.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace IdentityServer5.Extentions
 {
@@ -8,6 +9,7 @@ namespace IdentityServer5.Extentions
     {
         public static WebApplicationBuilder ConfigureIdentityServer(this WebApplicationBuilder app, IConfiguration Configuration)
         {
+            var migrationAssembly = typeof(Program).GetTypeInfo().Assembly.GetName().Name;
             app.Services.AddIdentity<User, UserRole>(option =>
             {
                 option.Password.RequireLowercase = false;
@@ -27,7 +29,7 @@ namespace IdentityServer5.Extentions
              .AddConfigurationStore(opt =>
             {
             opt.ConfigureDbContext = c => c.UseNpgsql(Configuration.GetConnectionString("MyConnection"),
-                sql => sql.MigrationsAssembly("__EFMigrationsHistory"));
+                sql => sql.MigrationsAssembly(migrationAssembly));
             })
             .AddAspNetIdentity<User>()
             .AddClientStore<ClientStore>()

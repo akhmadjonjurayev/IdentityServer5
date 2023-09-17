@@ -8,7 +8,7 @@ public class IdentityDb : IdentityDbContext<User, IdentityRole<Guid>, Guid>
 {
     public IdentityDb(DbContextOptions<IdentityDb> option) : base(option)
     {
-
+        Database.Migrate();
     }
 
     public override DbSet<User> Users {get;set;}

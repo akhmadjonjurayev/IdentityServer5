@@ -39,6 +39,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseStaticFiles("/wwwroot");
+
 app.UseAuthorization();
 
 app.MapControllers();

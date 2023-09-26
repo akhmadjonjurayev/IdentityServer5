@@ -1,4 +1,5 @@
 using Duende.IdentityServer.EntityFramework.DbContexts;
+using IdentityServer5.Data;
 using IdentityServer5.Extentions;
 using IdentityServer5.Service;
 using Microsoft.EntityFrameworkCore;
@@ -15,6 +16,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddScoped(typeof(IdentityDBSeed));
 builder.Services.AddScoped(typeof(UserService));
 
 builder.Services.AddDbContext<IdentityDb>(option => {
@@ -40,6 +42,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseStaticFiles("/wwwroot");
+
+app.UseSeedData();
 
 app.UseAuthorization();
 

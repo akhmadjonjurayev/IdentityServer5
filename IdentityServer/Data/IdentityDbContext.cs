@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Duende.IdentityServer.Models;
 using IdentityServer5.Models;
 
-public class IdentityDb : IdentityDbContext<User, IdentityRole<Guid>, Guid>
+public class IdentityDb : IdentityDbContext<User, UserRole, Guid>
 {
     public IdentityDb(DbContextOptions<IdentityDb> option) : base(option)
     {

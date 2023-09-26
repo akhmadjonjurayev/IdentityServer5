@@ -12,6 +12,9 @@ namespace IdentityServer5.Extentions
             var migrationAssembly = typeof(Program).GetTypeInfo().Assembly.GetName().Name;
             app.Services.AddIdentity<User, UserRole>(option =>
             {
+                option.Password.RequiredLength = 1;
+                option.Password.RequireNonAlphanumeric = false;
+                option.Password.RequireUppercase = false;
                 option.Password.RequireLowercase = false;
             }).AddEntityFrameworkStores<IdentityDb>();
 

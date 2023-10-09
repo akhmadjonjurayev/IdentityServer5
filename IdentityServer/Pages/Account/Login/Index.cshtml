@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="~/wwwroot/wwwroot/fonts/icomoon/style.css">
+    <link rel="stylesheet" href="~/wwwroot/fonts/icomoon/style.css">
 
     <link rel="stylesheet" href="~/wwwroot/css/owl.carousel.min.css">
 
@@ -42,6 +42,8 @@
               <p class="mb-4">Lorem ipsum dolor sit amet elit. Sapiente sit aut eos consectetur adipisicing.</p>
             </div>
             <form asp-page="/Account/Login/Index" method="post">
+              <input type="hidden" asp-for="Input.ReturnUrl" />
+
               <div class="form-group first">
                <label asp-for="Input.Username"></label>
                <input class="form-control" asp-for="Input.Username" autofocus>

@@ -43,6 +43,8 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles("/wwwroot");
 
+app.UseIdentityServer();
+
 app.UseSeedData();
 
 app.UseAuthorization();

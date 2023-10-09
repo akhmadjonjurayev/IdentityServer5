@@ -27,8 +27,7 @@
         {
             Duende.IdentityServer.Models.ApiResource apiResource_map = new Duende.IdentityServer.Models.ApiResource
             {
-                AllowedAccessTokenSigningAlgorithms = new List<string> { apiResource.AllowedAccessTokenSigningAlgorithms},
-                ApiSecrets = apiResource.Secrets.Select(l => new Duende.IdentityServer.Models.Secret
+                ApiSecrets = apiResource.Secrets?.Select(l => new Duende.IdentityServer.Models.Secret
                 {
                     Description = l.Description,
                     Expiration = l.Expiration,
@@ -39,8 +38,11 @@
                 DisplayName = apiResource.DisplayName,
                 Enabled = apiResource.Enabled,
                 Name = apiResource.Name,
-                Scopes = apiResource.Scopes.Select(l => l.Scope).ToList()
+                Scopes = apiResource.Scopes?.Select(l => l.Scope).ToList()
             };
+            if(!string.IsNullOrEmpty(apiResource.AllowedAccessTokenSigningAlgorithms))
+                apiResource_map.AllowedAccessTokenSigningAlgorithms = new List<string> { apiResource.AllowedAccessTokenSigningAlgorithms };
+
             return apiResource_map;
         }
 

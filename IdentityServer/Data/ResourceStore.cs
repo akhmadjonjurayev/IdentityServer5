@@ -2,6 +2,7 @@
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Stores;
 using IdentityServer5.Extentions;
+using Microsoft.EntityFrameworkCore;
 
 namespace IdentityServer5.Data
 {
@@ -14,7 +15,9 @@ namespace IdentityServer5.Data
         }
         public Task<IEnumerable<ApiResource>> FindApiResourcesByNameAsync(IEnumerable<string> apiResourceNames)
         {
-            var apiResourceEntities = _configurationDbContext.ApiResources.Where(l => apiResourceNames.Contains(l.Name)).ToList();
+            var apiResourceEntities = _configurationDbContext.ApiResources
+                .Include(res => res.Scopes).Include(res => res.Secrets)
+                .Where(l => apiResourceNames.Contains(l.Name)).ToList();
             var apiResourceMap = apiResourceEntities.Select(l => Functions.ConvertApiResourceToEntities(l));
             return Task.FromResult(apiResourceMap);
         }

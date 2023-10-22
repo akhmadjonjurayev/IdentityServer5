@@ -1,8 +1,8 @@
 ﻿/// <reference path="libs/oidc-client.js" />
 
 var config = {
-    authority: "https://localhost:5001/",
-    client_id: "js_oidc",
+    authority: "http://localhost:5000/",
+    client_id: "Kalinus",
     redirect_uri: window.location.origin + "/callback.html",
     post_logout_redirect_uri: window.location.origin + "/index.html",
 
@@ -12,8 +12,8 @@ var config = {
 
     // these two will be done dynamically from the buttons clicked, but are
     // needed if you want to use the silent_renew
-    response_type: "code",
-    scope: "openid profile email resource1.scope1 resource2.scope1",
+    response_type: "id_token token",
+    scope: "openid profile email ApiGateway",
 
     // this will toggle if profile endpoint is used
     loadUserInfo: true,

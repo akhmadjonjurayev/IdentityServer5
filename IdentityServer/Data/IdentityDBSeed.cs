@@ -1,4 +1,5 @@
-﻿using Duende.IdentityServer.EntityFramework.DbContexts;
+﻿using Duende.IdentityServer;
+using Duende.IdentityServer.EntityFramework.DbContexts;
 using Duende.IdentityServer.EntityFramework.Entities;
 using Duende.IdentityServer.Models;
 using IdentityServer5.Models;
@@ -96,36 +97,37 @@ namespace IdentityServer5.Data
 
                 var client = new Duende.IdentityServer.EntityFramework.Entities.Client
                 {
-                    ClientUri = "http://localhost",
+                    ClientUri = "http://localhost:5000/wwwroot/srv",
                     ClientId = "Kalinus",
                     ClientName = "Kalinus",
                     ClientSecrets = new List<ClientSecret>
                     {
                         new ClientSecret
                         {
-                            Value = "akhmadjonjurayev_duendeidentityserver"
+                            Value = "akhmadjonjurayev_duendeidentityserver".Sha256(),
+                            Type = IdentityServerConstants.SecretTypes.SharedSecret
                         }
                     },
                     RedirectUris = new List<ClientRedirectUri>
                     {
                         new ClientRedirectUri
                         {
-                            RedirectUri = "http://localhost:5000/callback"
+                            RedirectUri = "http://localhost:5000/wwwroot/srv/callback"
                         },
                         new ClientRedirectUri
                         {
-                            RedirectUri = "http://localhost:5000/silentrenew"
+                            RedirectUri = "http://localhost:5000/wwwroot/srv/silentrenew"
                         }
                     },
                     PostLogoutRedirectUris = new List<ClientPostLogoutRedirectUri>
                     {
                         new ClientPostLogoutRedirectUri
                         {
-                            PostLogoutRedirectUri = "http://localhost:5000"
+                            PostLogoutRedirectUri = "http://localhost:5000/wwwroot/srv"
                         },
                         new ClientPostLogoutRedirectUri
                         {
-                            PostLogoutRedirectUri = "http://localhost:5000/logout"
+                            PostLogoutRedirectUri = "http://localhost:5000/wwwroot/srv/logout"
                         }
                     },
                     AllowedCorsOrigins = new List<ClientCorsOrigin>
@@ -183,8 +185,8 @@ namespace IdentityServer5.Data
                             GrantType = "refresh_token"
                         },
                     },
-                    RequireClientSecret = true,
-                    RequireConsent = true,
+                    RequireClientSecret = false,
+                    RequireConsent = false,
                     RefreshTokenUsage = 1,
                     RefreshTokenExpiration = 3600,
                     AbsoluteRefreshTokenLifetime = 3600,

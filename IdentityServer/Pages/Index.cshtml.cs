@@ -20,7 +20,7 @@ public class Index : PageModel
     public IActionResult OnGet()
     {
         if (!signInManager.IsSignedIn(User))
-            return RedirectToPage("~/Login");
+            return Redirect("~/Account/Login");
         Version = typeof(Duende.IdentityServer.Hosting.IdentityServerMiddleware).Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion.Split('+').First();
         return Page();
     }

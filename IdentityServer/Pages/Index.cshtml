@@ -1,6 +1,11 @@
 @page
 @model IdentityServerHost.Pages.Home.Index
 
+@if(!User.Identity.IsAuthenticated)
+{
+    <h1>Claim not found ! </h1>
+}
+
 <div class="welcome-page">
     <h1>
         Welcome to Duende IdentityServer

@@ -3,6 +3,7 @@ using Duende.IdentityServer.EntityFramework.Entities;
 using Duende.IdentityServer.Models;
 using IdentityServer5.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using static Duende.IdentityServer.IdentityServerConstants;
 
 namespace IdentityServer5.Data
@@ -21,6 +22,12 @@ namespace IdentityServer5.Data
             this._userManager = userManager;
             this._roleManager = roleManager;
             this._configurationDbContext = configurationDbContext;
+
+            if (_configurationDbContext.Database.GetPendingMigrations().Any())
+                _configurationDbContext.Database.Migrate();
+
+            if (_identityDb.Database.GetPendingMigrations().Any())
+                _identityDb.Database.Migrate();
         }
 
         public async Task SeedData()

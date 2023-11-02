@@ -21,6 +21,7 @@ namespace IdentityServer5.Data
                 .Include(l => l.AllowedScopes)
                 .Include(l => l.RedirectUris)
                 .Include(l => l.PostLogoutRedirectUris)
+                .Include(l => l.ClientSecrets)
                 .FirstOrDefault(l => l.ClientId == clientId);
             if (client is null)
                 throw new Exception("error-not-found-data");

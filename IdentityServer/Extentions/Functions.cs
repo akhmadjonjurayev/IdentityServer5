@@ -20,6 +20,11 @@
                 AccessTokenLifetime = client.AccessTokenLifetime
             };
 
+            foreach(var entitySecret in client.ClientSecrets)
+            {
+                client_map.ClientSecrets.Add(new Duende.IdentityServer.Models.Secret(entitySecret.Value));
+            }
+
             return client_map;
         }
 

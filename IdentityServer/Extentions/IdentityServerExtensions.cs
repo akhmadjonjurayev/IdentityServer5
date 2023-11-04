@@ -9,6 +9,7 @@ namespace IdentityServer5.Extentions
     {
         public static WebApplicationBuilder ConfigureIdentityServer(this WebApplicationBuilder app, IConfiguration Configuration)
         {
+            var certificate = new System.Security.Cryptography.X509Certificates.X509Certificate2(Configuration["Certificate:Path"], Configuration["Certificate:Password"]);
             var migrationAssembly = typeof(Program).GetTypeInfo().Assembly.GetName().Name;
             app.Services.AddIdentity<User, UserRole>(option =>
             {
@@ -37,7 +38,8 @@ namespace IdentityServer5.Extentions
             .AddAspNetIdentity<User>()
             .AddClientStore<ClientStore>()
             .AddResourceStore<ResourceStore>()
-            .AddProfileService<ProfileService>();
+            .AddProfileService<ProfileService>()
+            .AddSigningCredential(certificate);
 
             return app;
         }

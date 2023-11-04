@@ -11,5 +11,11 @@ public class IdentityDb : IdentityDbContext<User, UserRole, Guid>
         Database.Migrate();
     }
 
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        //builder.HasDefaultSchema("duende");
+        base.OnModelCreating(builder);
+    }
+
     public override DbSet<User> Users {get;set;}
 }

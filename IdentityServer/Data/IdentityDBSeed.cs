@@ -53,6 +53,7 @@ namespace IdentityServer5.Data
 
             if(!_configurationDbContext.Clients.Any())
             {
+                var hashClientSecret = "akhmadjonjurayev_duendeidentityserver".Sha256();
                 var identityResources = new List<Duende.IdentityServer.Models.IdentityResource>
                 {
                     new IdentityResources.Address(),
@@ -104,7 +105,7 @@ namespace IdentityServer5.Data
                     {
                         new ClientSecret
                         {
-                            Value = "akhmadjonjurayev_duendeidentityserver".Sha256(),
+                            Value = hashClientSecret,
                             Type = IdentityServerConstants.SecretTypes.SharedSecret
                         }
                     },

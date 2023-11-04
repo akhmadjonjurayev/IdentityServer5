@@ -113,11 +113,11 @@ namespace IdentityServer5.Data
                     {
                         new ClientRedirectUri
                         {
-                            RedirectUri = "http://localhost:5000/wwwroot/srv/callback"
+                            RedirectUri = "http://localhost:5000/wwwroot/srv/callback.html"
                         },
                         new ClientRedirectUri
                         {
-                            RedirectUri = "http://localhost:5000/wwwroot/srv/silentrenew"
+                            RedirectUri = "http://localhost:5000/wwwroot/srv/silent.html"
                         }
                     },
                     PostLogoutRedirectUris = new List<ClientPostLogoutRedirectUri>
@@ -164,15 +164,19 @@ namespace IdentityServer5.Data
                         },
                         new ClientScope
                         {
+                            Scope = StandardScopes.OpenId,
+                        },
+                        new ClientScope
+                        {
                             Scope = "ApiGateway"
                         }
                     },
                     AllowedGrantTypes = new List<ClientGrantType>
                     {
-                        new ClientGrantType
-                        {
-                            GrantType = GrantType.AuthorizationCode
-                        },
+                        //new ClientGrantType
+                        //{
+                        //    GrantType = GrantType.AuthorizationCode
+                        //},
                         new ClientGrantType
                         {
                             GrantType = GrantType.ClientCredentials
@@ -185,6 +189,10 @@ namespace IdentityServer5.Data
                         {
                             GrantType = "refresh_token"
                         },
+                        new ClientGrantType
+                        {
+                            GrantType = GrantType.Implicit
+                        }
                     },
                     RequireClientSecret = false,
                     RequireConsent = false,

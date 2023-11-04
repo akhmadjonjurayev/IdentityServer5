@@ -3,7 +3,7 @@
 var config = {
     authority: "http://localhost:5000/",
     client_id: "Kalinus",
-    redirect_uri: window.location.origin + "/callback.html",
+    redirect_uri: window.location.origin + "/wwwroot/srv/callback.html",
     post_logout_redirect_uri: window.location.origin + "/index.html",
 
     // if we choose to use popup window instead for logins
@@ -20,7 +20,7 @@ var config = {
 
     // silent renew will get a new access_token via an iframe 
     // just prior to the old access_token expiring (60 seconds prior)
-    silent_redirect_uri: window.location.origin + "/silent.html",
+    silent_redirect_uri: window.location.origin + "wwwroot/srv/silent.html",
     automaticSilentRenew: true,
 
     monitorAnonymousSession: true,

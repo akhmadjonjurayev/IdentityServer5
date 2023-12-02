@@ -19,6 +19,16 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped(typeof(IdentityDBSeed));
 builder.Services.AddScoped(typeof(UserService));
 
+builder.Services.AddCors(l =>
+{
+    l.AddDefaultPolicy(policy =>
+    {
+        policy.WithOrigins("http://localhost:7854")
+        .AllowAnyHeader()
+        .AllowAnyMethod();
+    });
+});
+
 builder.Services.AddDbContext<IdentityDb>(option => {
    option.UseNpgsql(builder.Configuration.GetConnectionString("MyConnection"), l =>
    {
@@ -40,6 +50,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors();
 
 app.UseStaticFiles("/wwwroot");
 

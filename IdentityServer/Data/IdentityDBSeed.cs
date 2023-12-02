@@ -98,7 +98,7 @@ namespace IdentityServer5.Data
 
                 var client = new Duende.IdentityServer.EntityFramework.Entities.Client
                 {
-                    ClientUri = "http://localhost:5000/wwwroot/srv",
+                    ClientUri = "http://localhost:7854",
                     ClientId = "Kalinus",
                     ClientName = "Kalinus",
                     ClientSecrets = new List<ClientSecret>
@@ -113,22 +113,18 @@ namespace IdentityServer5.Data
                     {
                         new ClientRedirectUri
                         {
-                            RedirectUri = "http://localhost:5000/wwwroot/srv/callback.html"
+                            RedirectUri = "http://localhost:7854/callback.html"
                         },
                         new ClientRedirectUri
                         {
-                            RedirectUri = "http://localhost:5000/wwwroot/srv/silent.html"
+                            RedirectUri = "http://localhost:7854/silent.html"
                         }
                     },
                     PostLogoutRedirectUris = new List<ClientPostLogoutRedirectUri>
                     {
                         new ClientPostLogoutRedirectUri
                         {
-                            PostLogoutRedirectUri = "http://localhost:5000/wwwroot/srv"
-                        },
-                        new ClientPostLogoutRedirectUri
-                        {
-                            PostLogoutRedirectUri = "http://localhost:5000/wwwroot/srv/logout"
+                            PostLogoutRedirectUri = "http://localhost:7854"
                         }
                     },
                     AllowedCorsOrigins = new List<ClientCorsOrigin>
@@ -136,6 +132,10 @@ namespace IdentityServer5.Data
                         new ClientCorsOrigin
                         {
                             Origin = "http://localhost:5000"
+                        },
+                        new ClientCorsOrigin
+                        {
+                            Origin = "http://localhost:7854"
                         }
                     },
                     AllowAccessTokensViaBrowser = true,

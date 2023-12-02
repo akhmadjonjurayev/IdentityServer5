@@ -39,3 +39,5 @@
 /IdentityServer/.vs
 /docker-compose/bin
 /docker-compose/obj
+/WebClient/obj
+/WebClient/bin

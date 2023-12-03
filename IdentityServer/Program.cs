@@ -2,6 +2,7 @@ using Duende.IdentityServer.EntityFramework.DbContexts;
 using IdentityServer5.Data;
 using IdentityServer5.Extentions;
 using IdentityServer5.Service;
+using Microsoft.AspNetCore.CookiePolicy;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -48,6 +49,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCookiePolicy(new CookiePolicyOptions
+{
+    HttpOnly = HttpOnlyPolicy.None,
+    MinimumSameSitePolicy = SameSiteMode.None,
+    Secure = CookieSecurePolicy.Always
+});
 
 app.UseHttpsRedirection();
 

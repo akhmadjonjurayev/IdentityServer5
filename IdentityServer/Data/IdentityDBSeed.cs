@@ -124,7 +124,7 @@ namespace IdentityServer5.Data
                     {
                         new ClientPostLogoutRedirectUri
                         {
-                            PostLogoutRedirectUri = "http://localhost:7854"
+                            PostLogoutRedirectUri = "http://localhost:7854/index.html"
                         }
                     },
                     AllowedCorsOrigins = new List<ClientCorsOrigin>

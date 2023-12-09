@@ -27,7 +27,7 @@ namespace IdentityServer5.Extentions
                 options.Events.RaiseSuccessEvents = true;
 
                 options.EmitStaticAudienceClaim = true;
-
+                options.KeyManagement.Enabled = false;
                 options.IssuerUri = Configuration["IdentityUrl"];
             })
              .AddConfigurationStore(opt =>

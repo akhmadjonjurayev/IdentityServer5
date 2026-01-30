@@ -98,7 +98,7 @@ namespace IdentityServer5.Data
 
                 var client = new Duende.IdentityServer.EntityFramework.Entities.Client
                 {
-                    ClientUri = "http://localhost:7854",
+                    ClientUri = "http://localhost:5000",
                     ClientId = "Kalinus",
                     ClientName = "Kalinus",
                     ClientSecrets = new List<ClientSecret>
@@ -113,18 +113,18 @@ namespace IdentityServer5.Data
                     {
                         new ClientRedirectUri
                         {
-                            RedirectUri = "http://localhost:7854/callback.html"
+                            RedirectUri = "http://localhost:7001/callback.html"
                         },
                         new ClientRedirectUri
                         {
-                            RedirectUri = "http://localhost:7854/silent.html"
+                            RedirectUri = "http://localhost:7001/silent.html"
                         }
                     },
                     PostLogoutRedirectUris = new List<ClientPostLogoutRedirectUri>
                     {
                         new ClientPostLogoutRedirectUri
                         {
-                            PostLogoutRedirectUri = "http://localhost:7854/index.html"
+                            PostLogoutRedirectUri = "http://localhost:7001/index.html"
                         }
                     },
                     AllowedCorsOrigins = new List<ClientCorsOrigin>
@@ -135,7 +135,7 @@ namespace IdentityServer5.Data
                         },
                         new ClientCorsOrigin
                         {
-                            Origin = "http://localhost:7854"
+                            Origin = "http://localhost:7001"
                         }
                     },
                     AllowAccessTokensViaBrowser = true,
@@ -173,10 +173,10 @@ namespace IdentityServer5.Data
                     },
                     AllowedGrantTypes = new List<ClientGrantType>
                     {
-                        //new ClientGrantType
-                        //{
-                        //    GrantType = GrantType.AuthorizationCode
-                        //},
+                        new ClientGrantType
+                        {
+                            GrantType = GrantType.AuthorizationCode
+                        },
                         new ClientGrantType
                         {
                             GrantType = GrantType.ClientCredentials
@@ -189,17 +189,18 @@ namespace IdentityServer5.Data
                         {
                             GrantType = "refresh_token"
                         },
-                        new ClientGrantType
-                        {
-                            GrantType = GrantType.Implicit
-                        }
+                        //new ClientGrantType
+                        //{
+                        //    GrantType = GrantType.Implicit
+                        //}
                     },
                     RequireClientSecret = false,
                     RequireConsent = false,
                     RefreshTokenUsage = 1,
                     RefreshTokenExpiration = 3600,
                     AbsoluteRefreshTokenLifetime = 3600,
-                    AccessTokenLifetime = 3600
+                    AccessTokenLifetime = 3600,
+                    RequirePkce = true
                 };
                 _configurationDbContext.Clients.Add(client);
 

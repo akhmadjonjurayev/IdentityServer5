@@ -22,7 +22,7 @@ services:
     image: postgres
     container_name: dev-postgre
     ports:
-      - 5432:5432
+      - 5433:5432
     environment:
       - POSTGRES_PASSWORD=burgut
       - POSTGRES_USER=kalinus

@@ -98,7 +98,7 @@ namespace IdentityServer5.Data
 
                 var client = new Duende.IdentityServer.EntityFramework.Entities.Client
                 {
-                    ClientUri = "http://localhost:5000",
+                    ClientUri = "https://kalinus.uz:7001",
                     ClientId = "Kalinus",
                     ClientName = "Kalinus",
                     ClientSecrets = new List<ClientSecret>
@@ -113,7 +113,7 @@ namespace IdentityServer5.Data
                     {
                         new ClientRedirectUri
                         {
-                            RedirectUri = "http://localhost:7001/callback.html"
+                            RedirectUri = "https://kalinus.uz:7001/callback.html"
                         },
                         new ClientRedirectUri
                         {
@@ -124,7 +124,7 @@ namespace IdentityServer5.Data
                     {
                         new ClientPostLogoutRedirectUri
                         {
-                            PostLogoutRedirectUri = "http://localhost:7001/index.html"
+                            PostLogoutRedirectUri = "https://kalinus.uz:7001/index.html"
                         }
                     },
                     AllowedCorsOrigins = new List<ClientCorsOrigin>
@@ -135,7 +135,7 @@ namespace IdentityServer5.Data
                         },
                         new ClientCorsOrigin
                         {
-                            Origin = "http://localhost:7001"
+                            Origin = "https://kalinus.uz:7001"
                         }
                     },
                     AllowAccessTokensViaBrowser = true,
